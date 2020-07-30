@@ -5,6 +5,11 @@ public class Nodo {
 	private Nodo derecha;
 	private Nodo izquierda;
 	
+	public Nodo (int valor){
+		this.valor=valor;
+		derecha=izquierda=null;
+	
+	}
 	
 	public int getValor() {
 		return valor;
