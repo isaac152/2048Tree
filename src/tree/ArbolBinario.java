@@ -1,4 +1,4 @@
-package arbolbin;
+/*package tree;
 
 public class ArbolBinario {
 
@@ -38,7 +38,7 @@ public class ArbolBinario {
     }
     
     //buscar elemento
-    
+   /* 
     private boolean contieneNodo(Nodo actual, int valor){
     	if (actual==null){
     		return false;
@@ -59,7 +59,6 @@ public class ArbolBinario {
     	return raiz.hijoIzq==null
     			? raiz.x :valorMenor(raiz.hijoIzq);
     }
-    
     private Nodo eliminarNodo (Nodo actual, int valor){
     	
     	if (actual==null)//vacio
@@ -98,3 +97,4 @@ public class ArbolBinario {
     	raiz=eliminarNodo(raiz,valor);
     }
    }
+*/

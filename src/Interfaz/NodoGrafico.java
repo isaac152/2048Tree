@@ -4,14 +4,15 @@ import javax.swing.JLabel;
 import tree.Nodo;
 
 public class NodoGrafico {
-	Nodo nodo;
-	int posx;
-	int posy;
+	private Nodo nodo;
+	private int valor=2;
+	private int posx;
+	private int posy;
+	public int tamano=66;
+	
 	JLabel labelNodo;
 
-	public NodoGrafico(Nodo nodo) {
-		
-		int valor= nodo.getValor();
+	public NodoGrafico(int valor) {
 		labelNodo = new JLabel("");
 		String direccion= asignarImagen(valor);
 		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource(direccion)));
@@ -23,6 +24,17 @@ public class NodoGrafico {
 		return "/Imagenes/esfera"+aux+".png";
 	}
 	
+	public int getValor() {
+		return valor;
+	}
+
+
+	public void setValor(int valor) {
+		this.valor = valor;
+		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource(asignarImagen(valor))));
+	}
+
+
 	public Nodo getNodo() {
 		return nodo;
 	}
