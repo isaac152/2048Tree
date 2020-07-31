@@ -27,8 +27,10 @@ public class Tablero extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tablero frame = new Tablero();
-					frame.setVisible(true);
+					
+					MenuInicial a = new MenuInicial();
+					a.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -81,7 +83,7 @@ public class Tablero extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setLocation(-29, -13);
-		lblNewLabel.setSize(6667, 5000);
+		lblNewLabel.setSize(6686, 5030);
 		lblNewLabel.setIcon(new ImageIcon(Tablero.class.getResource("/Imagenes/fondo2.jpg")));
 		
 		

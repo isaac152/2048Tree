@@ -74,14 +74,17 @@ public class RegistroUsuario extends JDialog {
 						int contrasena=toInt(textField_4.getText()), contracheck=toInt(textField_5.getText());
 						//verificar que todas las condiciones se cumplan:
 						if (contrasena!=contracheck){
-							lblNewLabel.setText("Las contraseÃ±as no coinciden.");
+							lblNewLabel.setText("Las contraseñas no coinciden.");
 							return;
 						
 					}
 						//...
 						//despues de todos los checks
 						setVisible(false); //you can't see me!
+						MenuInicial a = new MenuInicial();
+						a.setVisible(true);
 						dispose(); //Destroy the JFrame object
+						
 				}});
 				buttonPane.setLayout(null);
 				
@@ -98,6 +101,8 @@ public class RegistroUsuario extends JDialog {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						setVisible(false); //you can't see me!
+						MenuInicial a = new MenuInicial();
+						a.setVisible(true);
 						dispose(); //Destroy the JFrame object
 					}
 				});
@@ -178,4 +183,7 @@ public class RegistroUsuario extends JDialog {
 		
 	}
 	
+	
+
+
 }
