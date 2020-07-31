@@ -16,7 +16,6 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import net.miginfocom.swing.MigLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -50,7 +49,6 @@ public class MenuInicial extends JDialog {
 		contentPanel.setBackground(new Color(135, 206, 250));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
-		contentPanel.setLayout(new MigLayout("", "[162px][212px]", "[66px][20px][20px][19px][24px]"));
 		
 		JLabel label = new JLabel("");
 		label.setIcon(new ImageIcon(MenuInicial.class.getResource("/Imagenes/esfera2048.png")));
