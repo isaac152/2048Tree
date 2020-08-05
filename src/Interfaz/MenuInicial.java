@@ -7,11 +7,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DatosUsuario.ArbolUsuario;
+import DatosUsuario.Archivos;
+import DatosUsuario.NodoUsuario;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
@@ -23,6 +30,11 @@ public class MenuInicial extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textUser;
 	private JPasswordField passwordField;
+	
+	ArbolUsuario l1 =  new ArbolUsuario();
+	NodoUsuario n1 = null;
+	
+	Archivos principal = new Archivos();
 
 	/**
 	 * Launch the application.
@@ -41,6 +53,7 @@ public class MenuInicial extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuInicial() {
+		l1=principal.leerFichero();
 		setResizable(false);
 		setBounds(100, 100, 349, 246);
 		getContentPane().setLayout(new BorderLayout());
@@ -54,10 +67,6 @@ public class MenuInicial extends JDialog {
 		label.setIcon(new ImageIcon(MenuInicial.class.getResource("/Imagenes/esfera2048.png")));
 		contentPanel.add(label);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(100, 43, 0, 0);
-		contentPanel.add(label_1);
-		
 		JLabel lblNombreDeUsuario = new JLabel("USUARIO:");
 		lblNombreDeUsuario.setBounds(97, 88, 66, 14);
 		lblNombreDeUsuario.setFont(new Font("Georgia", Font.ITALIC, 12));
@@ -69,21 +78,13 @@ public class MenuInicial extends JDialog {
 		textUser.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("CONTRASE\u00D1A:");
-		lblContrasea.setBounds(70, 122, 93, 14);
+		lblContrasea.setBounds(70, 112, 93, 14);
 		lblContrasea.setFont(new Font("Georgia", Font.ITALIC, 12));
 		contentPanel.add(lblContrasea);
 		
-		JLabel label_3 = new JLabel("");
-		label_3.setBounds(246, 91, 0, 0);
-		contentPanel.add(label_3);
-		
-		JLabel label_4 = new JLabel("");
-		label_4.setBounds(251, 91, 0, 0);
-		contentPanel.add(label_4);
-		
 		passwordField = new JPasswordField();
 		passwordField.setBackground(Color.WHITE);
-		passwordField.setBounds(175, 119, 86, 20);
+		passwordField.setBounds(175, 110, 86, 20);
 		contentPanel.add(passwordField);
 		
 		JLabel lblbtree = new JLabel("-BTree");
@@ -91,6 +92,14 @@ public class MenuInicial extends JDialog {
 		lblbtree.setFont(new Font("Georgia", Font.BOLD, 29));
 		lblbtree.setBounds(163, 24, 123, 38);
 		contentPanel.add(lblbtree);
+		
+		JLabel lblError = new JLabel("*Usuario o Contrase\u00F1a invalida");
+		lblError.setForeground(new Color(255, 0, 0));
+		lblError.setFont(new Font("Georgia", Font.PLAIN, 11));
+		lblError.setBounds(150, 130, 187, 14);
+		lblError.setVisible(false);
+		contentPanel.add(lblError);
+		
 		{
 			JButton btnIngresar = new JButton("Ingresar");
 			btnIngresar.setBounds(127, 151, 93, 23);
@@ -98,19 +107,34 @@ public class MenuInicial extends JDialog {
 			btnIngresar.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					//busca username y pass y compara
-					
+					boolean flag = false;
+					NodoUsuario aux = l1.getPrimero();
+					boolean error=false;
+					while(aux != null){
+						if (textUser.getText().equals(aux.getUsername())){
+							if (passwordField.getText().equals(aux.getContraseña())){
+								flag=true;
+								break;
+							}
+						}
+						aux = aux.getRight(); 
+					}
+					if (flag){
 						Tablero frame= new Tablero();
 						frame.setVisible(true);
 						setVisible(false);
 						dispose();
-			
-					
+					}else{
+						lblError.getText();
+						lblError.setVisible(true);
+						error=true;
+					}
 				}
 			});
 			btnIngresar.setActionCommand("OK");
 			getRootPane().setDefaultButton(btnIngresar);
 		}
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

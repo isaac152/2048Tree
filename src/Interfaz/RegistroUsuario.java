@@ -7,19 +7,22 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
+import DatosUsuario.*;
+
 import javax.swing.JPasswordField;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class RegistroUsuario extends JDialog {
 
@@ -30,6 +33,10 @@ public class RegistroUsuario extends JDialog {
 	private JTextField textEmail;
 	private JPasswordField passwordFieldConfirm;
 	private JPasswordField passwordField;
+	ArbolUsuario l1 =  new ArbolUsuario();
+	NodoUsuario n1 = null;
+	
+	Archivos principal = new Archivos();
 
 	/**
 	 * Launch the application.
@@ -63,6 +70,7 @@ public class RegistroUsuario extends JDialog {
 	 * Create the dialog.
 	 */
 	public RegistroUsuario() {
+		l1=principal.leerFichero();
 		setResizable(false);
 		getContentPane().setBackground(new Color(173, 216, 230));
 		JLabel lblNewLabel = new JLabel("");
@@ -83,27 +91,27 @@ public class RegistroUsuario extends JDialog {
 			
 			JLabel lblApellido = new JLabel("Apellido:");
 			lblApellido.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblApellido.setBounds(84, 75, 51, 14);
+			lblApellido.setBounds(84, 80, 51, 14);
 			getContentPane().add(lblApellido);
 			
 			JLabel lblNombre = new JLabel("Nombre:");
 			lblNombre.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblNombre.setBounds(84, 45, 51, 14);
+			lblNombre.setBounds(84, 47, 51, 14);
 			getContentPane().add(lblNombre);
 			
-			JLabel lblUsername = new JLabel("Username:");
+			JLabel lblUsername = new JLabel("Usuario:");
 			lblUsername.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblUsername.setBounds(72, 142, 63, 14);
+			lblUsername.setBounds(85, 146, 51, 14);
 			getContentPane().add(lblUsername);
 			
 			JLabel lblEmail = new JLabel("E-mail:");
 			lblEmail.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblEmail.setBounds(94, 109, 63, 14);
+			lblEmail.setBounds(92, 111, 63, 14);
 			getContentPane().add(lblEmail);
 			
 			JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 			lblContrasea.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblContrasea.setBounds(104, 178, 80, 14);
+			lblContrasea.setBounds(116, 180, 80, 14);
 			getContentPane().add(lblContrasea);
 			
 			JLabel lblConfirmarContrasea = new JLabel("Confirmar contrase\u00F1a:");
@@ -130,32 +138,32 @@ public class RegistroUsuario extends JDialog {
 				}
 			});
 			textApellido.setColumns(10);
-			textApellido.setBounds(139, 73, 250, 20);
+			textApellido.setBounds(139, 75, 250, 20);
 			getContentPane().add(textApellido);
 			
 			textUsername = new JTextField();
 			textUsername.setColumns(10);
-			textUsername.setBounds(139, 139, 250, 20);
+			textUsername.setBounds(139, 142, 250, 20);
 			getContentPane().add(textUsername);
 			
 			textEmail = new JTextField();
 			textEmail.setColumns(10);
-			textEmail.setBounds(139, 106, 250, 20);
+			textEmail.setBounds(139, 108, 250, 20);
 			getContentPane().add(textEmail);
 			
 			passwordFieldConfirm = new JPasswordField();
-			passwordFieldConfirm.setBounds(195, 200, 194, 20);
+			passwordFieldConfirm.setBounds(195, 201, 194, 20);
 			getContentPane().add(passwordFieldConfirm);
 			
 			passwordField = new JPasswordField();
-			passwordField.setBounds(194, 175, 194, 20);
+			passwordField.setBounds(194, 177, 194, 20);
 			getContentPane().add(passwordField);
 			
 			JLabel lblErrorNombre = new JLabel("*Nombre invalido");
 			lblErrorNombre.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblErrorNombre.setFont(new Font("Georgia", Font.PLAIN, 11));
 			lblErrorNombre.setForeground(new Color(255, 0, 0));
-			lblErrorNombre.setBounds(54, 30, 335, 14);
+			lblErrorNombre.setBounds(54, 29, 335, 14);
 			lblErrorNombre.setVisible(false);
 			getContentPane().add(lblErrorNombre);
 			
@@ -163,7 +171,7 @@ public class RegistroUsuario extends JDialog {
 			lblErrorContraseñas.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblErrorContraseñas.setFont(new Font("Georgia", Font.PLAIN, 11));
 			lblErrorContraseñas.setForeground(Color.RED);
-			lblErrorContraseñas.setBounds(54, 151, 334, 38);
+			lblErrorContraseñas.setBounds(54, 152, 334, 38);
 			lblErrorContraseñas.setVisible(false);
 			getContentPane().add(lblErrorContraseñas);
 			
@@ -171,7 +179,7 @@ public class RegistroUsuario extends JDialog {
 			lblErrorUser.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblErrorUser.setFont(new Font("Georgia", Font.PLAIN, 11));
 			lblErrorUser.setForeground(Color.RED);
-			lblErrorUser.setBounds(54, 126, 335, 14);
+			lblErrorUser.setBounds(54, 128, 335, 14);
 			lblErrorUser.setVisible(false);
 			getContentPane().add(lblErrorUser);
 			
@@ -187,7 +195,7 @@ public class RegistroUsuario extends JDialog {
 			lblErrorApellido.setHorizontalAlignment(SwingConstants.RIGHT);
 			lblErrorApellido.setFont(new Font("Georgia", Font.PLAIN, 11));
 			lblErrorApellido.setForeground(Color.RED);
-			lblErrorApellido.setBounds(54, 61, 335, 14);
+			lblErrorApellido.setBounds(54, 62, 335, 14);
 			lblErrorApellido.setVisible(false);
 			getContentPane().add(lblErrorApellido);
 			
@@ -209,42 +217,47 @@ public class RegistroUsuario extends JDialog {
 						lblErrorContraseñas.setVisible(false);
 						boolean error=false;
 						if (textNombre.getText().length() < 3){
-							lblErrorNombre.setText("Error: nombre NO puede ser menor a 3 caracteres");
+							lblErrorNombre.setText("Error: nombre NO puede ser menor a 3 caracteres.");
 							lblErrorNombre.setVisible(true);
 							error=true;
 						}
 						if (textNombre.getText().isEmpty()){
-							lblErrorNombre.setText("Error: nombre NO puede estar en blanco");
+							lblErrorNombre.setText("Error: nombre NO puede estar en blanco.");
 							lblErrorNombre.setVisible(true);
 							error=true;
 						}
 						if (textApellido.getText().length() < 4){
-							lblErrorApellido.setText("Error: apellido NO puede ser menor a 4 caracteres");
+							lblErrorApellido.setText("Error: apellido NO puede ser menor a 4 caracteres.");
 							lblErrorApellido.setVisible(true);
 							error=true;
 						}
 						if (textApellido.getText().isEmpty()){
-							lblErrorApellido.setText("Error: apellido NO puede estar en blanco");
+							lblErrorApellido.setText("Error: apellido NO puede estar en blanco.");
 							lblErrorApellido.setVisible(true);
 							error=true;
 						}
-						if (textEmail.getText().isEmpty()){
-							lblErrorUser.setText("Error: email NO puede estar en blanco");
+						if (textUsername.getText().isEmpty()){
+							lblErrorUser.setText("Error: usuario NO puede estar en blanco.");
 							lblErrorUser.setVisible(true);
 							error=true;
 						}
+						if (textUsername.getText().length() < 5){
+							lblErrorUser.setText("Error: usuario debe contener minimo 5 caracteres.");
+							lblErrorUser.setVisible(true);
+							error=true;
+						}	
 						if (!verificarEmail(textEmail.getText())){
-							lblErrorEmail.setText("Error: email invalido");
+							lblErrorEmail.setText("Error: email invalido.");
 							lblErrorEmail.setVisible(true);
 							error=true;
 						}
 						if (textEmail.getText().isEmpty()){
-							lblErrorEmail.setText("Error: email NO puede estar en blanco");
+							lblErrorEmail.setText("Error: email NO puede estar en blanco.");
 							lblErrorEmail.setVisible(true);
 							error=true;
 						}
 						if (passwordField.getText().isEmpty()||passwordFieldConfirm.getText().isEmpty()){
-							lblErrorContraseñas.setText("Error: contraseña en blanco");
+							lblErrorContraseñas.setText("Error: contraseña en blanco.");
 							lblErrorContraseñas.setVisible(true);
 							error=true;
 						}
@@ -255,13 +268,38 @@ public class RegistroUsuario extends JDialog {
 							error=true;
 							
 						}
-							
-						
+						if (passwordField.getText().length() < 6 || passwordField.getText().length() > 8){
+							lblErrorContraseñas.setText("Error: contraseña debe contener entre 6 y 8 caracteres.");
+							lblErrorContraseñas.setVisible(true);
+							error=true;
+						}	
+						//arreglar
 						if (!error){
-							setVisible(false); //you can't see me!
-							MenuInicial a = new MenuInicial();
-							a.setVisible(true);
-							dispose(); //Destroy the JFrame object
+							NodoUsuario n1 = new NodoUsuario(textNombre.getText(),textApellido.getText(),textEmail.getText(),textUsername.getText(),passwordField.getText());							
+							NodoUsuario aux = l1.getPrimero();
+							boolean flag = false;
+							while(aux != null){
+								if (textUsername.getText().equals(aux.getUsername())){
+									flag=true;
+									break;
+								}
+								aux = aux.getRight(); 
+							}
+							if (!flag){
+								l1.insertarElementoPrimero(n1);
+								principal.escribirFichero(n1);
+								JOptionPane.showMessageDialog(null, "REGISTRO EXITOSO");
+								setVisible(false); //you can't see me!
+								MenuInicial a = new MenuInicial();
+								a.setVisible(true);
+								dispose(); //Destroy the JFrame object
+							}
+							else{
+								lblErrorUser.setText("Error: usuario ya se encuentra registrado.");
+								lblErrorUser.setVisible(true);
+								error=true;
+							}
+														
 						}
 					}
 				});
