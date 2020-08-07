@@ -51,6 +51,7 @@ public class RegistroUsuario extends JDialog {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	private void verificarTecla(KeyEvent e){
 		char caracter = e.getKeyChar();
 		if ((!Character.isLetter(caracter))&&(!Character.isSpace(caracter)))
@@ -277,15 +278,26 @@ public class RegistroUsuario extends JDialog {
 						if (!error){
 							NodoUsuario n1 = new NodoUsuario(textNombre.getText(),textApellido.getText(),textEmail.getText(),textUsername.getText(),passwordField.getText());							
 							NodoUsuario aux = l1.getPrimero();
-							boolean flag = false;
+							//check username
+							boolean flag1 = false, flag2=false;
+							
 							while(aux != null){
 								if (textUsername.getText().equals(aux.getUsername())){
-									flag=true;
+									flag1=true;
 									break;
 								}
 								aux = aux.getRight(); 
 							}
-							if (!flag){
+							//check email
+							aux = l1.getPrimero();
+							while(aux != null){
+								if (textEmail.getText().equals(aux.getEmail())){
+									flag2=true;
+									break;
+								}
+								aux = aux.getRight(); 
+							}
+							if ((!flag1)&&(!flag2)){
 								l1.insertarElementoPrimero(n1);
 								principal.escribirFichero(n1);
 								JOptionPane.showMessageDialog(null, "REGISTRO EXITOSO");
@@ -295,9 +307,15 @@ public class RegistroUsuario extends JDialog {
 								dispose(); //Destroy the JFrame object
 							}
 							else{
-								lblErrorUser.setText("Error: usuario ya se encuentra registrado.");
-								lblErrorUser.setVisible(true);
-								error=true;
+								if (flag1==true)
+									{lblErrorUser.setText("Error: usuario ya se encuentra registrado.");
+									lblErrorUser.setVisible(true);
+									error=true;}
+								if (flag2==true){
+									lblErrorEmail.setText("Error: email ya se encuentra registrado.");
+									lblErrorEmail.setVisible(true);
+									error=true;
+								}
 							}
 														
 						}
