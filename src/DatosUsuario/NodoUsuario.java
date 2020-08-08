@@ -5,16 +5,16 @@ public class NodoUsuario {
 	private String apellido;
 	private String email;
 	private String username;
-	private String contraseña;
+	private String contrasena;
 	private NodoUsuario left;
 	private NodoUsuario right;
 	 
-	public NodoUsuario(String nombre,String apellido,String email,String username,String contraseña) {
+	public NodoUsuario(String nombre,String apellido,String email,String username,String contrasena) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.username = username;
-		this.contraseña = contraseña;
+		this.contrasena = contrasena;
 		this.left=null;
 		this.right=null;
 	}
@@ -54,12 +54,12 @@ public class NodoUsuario {
 		this.username = username;
 	}
 	
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasena() {
+		return contrasena;
 	}
 	
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasena(String contrasena) {
+		this.contrasena = contrasena;
 	}
 	 
 	public NodoUsuario getLeft() {
@@ -79,7 +79,7 @@ public class NodoUsuario {
 	}
 	 
 	public String toString(){
-		return("Node [NOMBRE = "+ nombre + "----   APELLIDO = "+ apellido+ "----   EMAIL = "+ email+ "----   USUARIO = "+ username+ "----   CONTRASEÑA = "+ contraseña+  "]");
+		return("Node [NOMBRE = "+ nombre + "----   APELLIDO = "+ apellido+ "----   EMAIL = "+ email+ "----   USUARIO = "+ username+ "----   contrasena = "+ contrasena+  "]");
 	} 
 	
 }

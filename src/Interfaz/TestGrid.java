@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import tree.Arbol;
 import tree.Nodo;
+import tree.Arbol;
 
 import javax.swing.ImageIcon;
 import java.awt.GridLayout;

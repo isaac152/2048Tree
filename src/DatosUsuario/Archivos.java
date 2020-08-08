@@ -11,14 +11,14 @@ public class Archivos {
 
 	public static void escribirFichero(NodoUsuario nodo) {
 		FileWriter flwriter = null;
-		try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros 
+		try {//ademï¿½s de la ruta del archivo recibe un parï¿½metro de tipo boolean, que le indican que se va aï¿½adir mï¿½s registros 
 			flwriter = new FileWriter("src//DatosUsuario//dataRegistro.txt",true);
 			BufferedWriter bfwriter = new BufferedWriter(flwriter);
 			bfwriter.write(nodo.getNombre() + ",");
 			bfwriter.write(nodo.getApellido() + ",");
 			bfwriter.write(nodo.getEmail() + ",");
 			bfwriter.write(nodo.getUsername() + ",");
-			bfwriter.write(nodo.getContraseña() +"\n");
+			bfwriter.write(nodo.getContrasena() +"\n");
 			bfwriter.close(); 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,14 +48,14 @@ public class Archivos {
 				// el objeto scanner lee linea a linea desde el archivo
 				String linea = scanner.nextLine();
 				Scanner delimitar = new Scanner(linea);
-				//se usa una expresión regular que valida que antes o despues de una coma (,) exista cualquier cosa			
+				//se usa una expresiï¿½n regular que valida que antes o despues de una coma (,) exista cualquier cosa			
 				delimitar.useDelimiter("\\s*,\\s*");
 				NodoUsuario nodo= new NodoUsuario();
 				nodo.setNombre(delimitar.next());
 				nodo.setApellido(delimitar.next());
 				nodo.setEmail(delimitar.next());
 				nodo.setUsername(delimitar.next());
-				nodo.setContraseña(delimitar.next());
+				nodo.setContrasena(delimitar.next());
 				usuarios.insertarElementoPrimero(nodo);
 			}
 			scanner.close();

@@ -102,7 +102,7 @@ public class MenuInicial extends JDialog {
 		
 		{
 			JButton btnIngresar = new JButton("Ingresar");
-			btnIngresar.setBounds(127, 151, 93, 23);
+			btnIngresar.setBounds(127, 151, 120, 23);
 			contentPanel.add(btnIngresar);
 			btnIngresar.addMouseListener(new MouseAdapter() {
 				@Override
@@ -112,7 +112,7 @@ public class MenuInicial extends JDialog {
 					boolean error=false;
 					while(aux != null){
 						if (textUser.getText().equals(aux.getUsername())){
-							if (passwordField.getText().equals(aux.getContraseña())){
+							if (passwordField.getText().equals(aux.getContrasena())){
 								flag=true;
 								break;
 							}

@@ -60,7 +60,7 @@ public class RegistroUsuario extends JDialog {
 	}
 	
 	private boolean verificarEmail(String email){
-		// Patrón para validar el email
+		// Patrï¿½n para validar el email
 		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 		Matcher mather = pattern.matcher(email);
 		if (mather.find() == true) return true;
@@ -92,32 +92,32 @@ public class RegistroUsuario extends JDialog {
 			
 			JLabel lblApellido = new JLabel("Apellido:");
 			lblApellido.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblApellido.setBounds(84, 80, 51, 14);
+			lblApellido.setBounds(30, 80, 105, 14);
 			getContentPane().add(lblApellido);
 			
 			JLabel lblNombre = new JLabel("Nombre:");
 			lblNombre.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblNombre.setBounds(84, 47, 51, 14);
+			lblNombre.setBounds(30, 47, 105, 14);
 			getContentPane().add(lblNombre);
 			
 			JLabel lblUsername = new JLabel("Usuario:");
 			lblUsername.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblUsername.setBounds(85, 146, 51, 14);
+			lblUsername.setBounds(30, 146, 106, 14);
 			getContentPane().add(lblUsername);
 			
 			JLabel lblEmail = new JLabel("E-mail:");
 			lblEmail.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblEmail.setBounds(92, 111, 63, 14);
+			lblEmail.setBounds(30, 111, 125, 23);
 			getContentPane().add(lblEmail);
 			
 			JLabel lblContrasea = new JLabel("Contrase\u00F1a:");
 			lblContrasea.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblContrasea.setBounds(116, 180, 80, 14);
+			lblContrasea.setBounds(30, 180, 166, 11);
 			getContentPane().add(lblContrasea);
 			
 			JLabel lblConfirmarContrasea = new JLabel("Confirmar contrase\u00F1a:");
 			lblConfirmarContrasea.setFont(new Font("Georgia", Font.PLAIN, 12));
-			lblConfirmarContrasea.setBounds(54, 203, 144, 14);
+			lblConfirmarContrasea.setBounds(30, 203, 168, 14);
 			getContentPane().add(lblConfirmarContrasea);
 			
 			textNombre = new JTextField();
@@ -168,13 +168,13 @@ public class RegistroUsuario extends JDialog {
 			lblErrorNombre.setVisible(false);
 			getContentPane().add(lblErrorNombre);
 			
-			JLabel lblErrorContraseñas = new JLabel("*Contrase\u00F1as invalidas");
-			lblErrorContraseñas.setHorizontalAlignment(SwingConstants.RIGHT);
-			lblErrorContraseñas.setFont(new Font("Georgia", Font.PLAIN, 11));
-			lblErrorContraseñas.setForeground(Color.RED);
-			lblErrorContraseñas.setBounds(54, 152, 334, 38);
-			lblErrorContraseñas.setVisible(false);
-			getContentPane().add(lblErrorContraseñas);
+			JLabel lblErrorContrasenas = new JLabel("*Contrase\u00F1as invalidas");
+			lblErrorContrasenas.setHorizontalAlignment(SwingConstants.RIGHT);
+			lblErrorContrasenas.setFont(new Font("Georgia", Font.PLAIN, 11));
+			lblErrorContrasenas.setForeground(Color.RED);
+			lblErrorContrasenas.setBounds(54, 152, 334, 38);
+			lblErrorContrasenas.setVisible(false);
+			getContentPane().add(lblErrorContrasenas);
 			
 			JLabel lblErrorUser = new JLabel("*User invalido");
 			lblErrorUser.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -206,7 +206,7 @@ public class RegistroUsuario extends JDialog {
 			getContentPane().add(buttonPane);
 			{
 				JButton btnRegistrar = new JButton("Registrar");
-				btnRegistrar.setBounds(243, 9, 89, 23);
+				btnRegistrar.setBounds(136, 9, 156, 23);
 				btnRegistrar.addMouseListener(new MouseAdapter() {
 					@SuppressWarnings("deprecation")
 					@Override
@@ -215,7 +215,7 @@ public class RegistroUsuario extends JDialog {
 						lblErrorApellido.setVisible(false);
 						lblErrorUser.setVisible(false);
 						lblErrorEmail.setVisible(false);
-						lblErrorContraseñas.setVisible(false);
+						lblErrorContrasenas.setVisible(false);
 						boolean error=false;
 						if (textNombre.getText().length() < 3){
 							lblErrorNombre.setText("Error: nombre NO puede ser menor a 3 caracteres.");
@@ -258,20 +258,20 @@ public class RegistroUsuario extends JDialog {
 							error=true;
 						}
 						if (passwordField.getText().isEmpty()||passwordFieldConfirm.getText().isEmpty()){
-							lblErrorContraseñas.setText("Error: contraseña en blanco.");
-							lblErrorContraseñas.setVisible(true);
+							lblErrorContrasenas.setText("Error: contraseï¿½a en blanco.");
+							lblErrorContrasenas.setVisible(true);
 							error=true;
 						}
 						if (String.valueOf(passwordField.getText()).equals(String.valueOf(passwordFieldConfirm.getText())));
 						else{
-							lblErrorContraseñas.setText("Error: contraseñas no coinciden.");
-							lblErrorContraseñas.setVisible(true);
+							lblErrorContrasenas.setText("Error: Contrasenas no coinciden.");
+							lblErrorContrasenas.setVisible(true);
 							error=true;
 							
 						}
 						if (passwordField.getText().length() < 6 || passwordField.getText().length() > 8){
-							lblErrorContraseñas.setText("Error: contraseña debe contener entre 6 y 8 caracteres.");
-							lblErrorContraseñas.setVisible(true);
+							lblErrorContrasenas.setText("Error: contraseï¿½a debe contener entre 6 y 8 caracteres.");
+							lblErrorContrasenas.setVisible(true);
 							error=true;
 						}	
 						//arreglar
@@ -341,7 +341,7 @@ public class RegistroUsuario extends JDialog {
 						dispose(); //Destroy the JFrame object
 					}
 				});
-				btnCancelar.setBounds(345, 9, 89, 23);
+				btnCancelar.setBounds(304, 9, 130, 23);
 				btnCancelar.setActionCommand("Cancel");
 				buttonPane.add(btnCancelar);
 			}
