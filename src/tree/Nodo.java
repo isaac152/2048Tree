@@ -1,28 +1,48 @@
 package tree;
+import Interfaz.Tablero;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+
 public class Nodo {
 
-	private int clave=2;
-	private int nivel;
+	private int clave;
+	private int valor=2;
+	private int nivel=0;
 	private Nodo left;
 	private Nodo right;
-	private Nodo padre;
-	private int posx;
-	private int posy;
-	private boolean ocupado;
+	private int posx=1;
+	public JLabel labelNodo;
+	public GridBagConstraints gbc_graf = new GridBagConstraints();
+	private boolean ocupado=false;
 	
 	
-	public Nodo(int clave){
-		this.clave = clave;
-		this.nivel = 0;
+	public Nodo(){
+		labelNodo = new JLabel("");
 		this.right = null;
 		this.left = null;
+		String direccion= asignarImagen(this.valor);
+		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource(direccion)));
+		gbc_graf.insets = new Insets(0, 0, 5, 5);
+		gbc_graf.gridy=0;
+		labelNodo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Global.Click(clave);
+					if(Global.id2!=0){
+						Global.Sumar();
+					}
+			}
+		});	}
+	public void Vaciado(){
+		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource("/Imagenes/blanco.png")));
+		this.valor=0;
+		this.ocupado=false;
+		
 	}
-	public Nodo(){
-		this.right= null;
-		this.left = null;
-		this.nivel=0;
-	}
-
 	public int getClave() {
 		return clave;
 	}
@@ -55,23 +75,6 @@ public class Nodo {
 		this.right = right;
 	}
 
-	public Nodo getPadre() {
-		return padre;
-	}
-
-	public void setPadre(Nodo padre) {
-		this.padre = padre;
-	}
-    public void Nivel() {
-        int level = 0;
-        Nodo n = this;
-        while (n != null && n.padre != null) {
-            level++;
-            n = n.padre;
-        }
-         this.nivel=level;
-   }
-
 	public int getNivel() {
 		return nivel;
 	}
@@ -82,21 +85,30 @@ public class Nodo {
 	public int getPosx() {
 		return posx;
 	}
-	public int getPosy() {
-		return posy;
-	}
 	public boolean isOcupado() {
 		return ocupado;
 	}
 	public void setPosx(int posx) {
 		this.posx = posx;
 	}
-	public void setPosy(int posy) {
-		this.posy = posy;
-	}
 	public void setOcupado(boolean ocupado) {
 		this.ocupado = ocupado;
 	}
-	
+	public int getValor() {
+		return valor;
+	}
+	public void setValor(int valor) {
+		this.valor = valor;
+		cambiar(valor);
+	}
+	public void cambiar(int valor){
+		this.valor=valor;
+		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource(asignarImagen(valor))));
+	}
+	private String asignarImagen(int valor){
+		String aux= String.valueOf(valor);
+		return "/Imagenes/esfera"+aux+".png";
+	}
+
     
 }
