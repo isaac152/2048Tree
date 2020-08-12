@@ -3,6 +3,10 @@ import tree.ArbolSupremo;
 import tree.Nodo;
 import tree.Global;
 
+import DatosUsuario.Archivos;
+import arbolScores.ArbolScores;
+import arbolScores.NodoScores;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -46,6 +50,11 @@ public class Tablero extends JFrame implements ActionListener{
 	Contenedor varas2=new Contenedor();
 	Contenedor varas3=new Contenedor();
 	Contenedor varas4=new Contenedor();
+	
+	ArbolScores a1= new ArbolScores();
+	Archivos arch = new Archivos();
+	NodoScores n1=null;
+	static String usuario;
 
 
 	/**
@@ -55,7 +64,7 @@ public class Tablero extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Tablero frame = new Tablero();
+					Tablero frame = new Tablero(usuario);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,7 +76,19 @@ public class Tablero extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public Tablero() {
+	public Tablero(String user) {
+		usuario=user;
+		a1=arch.leerFicheroScore();
+		NodoScores aux1=a1.getPrimero();
+		while (aux1!=null){
+			if (aux1.getUsername().equals(usuario)){
+				n1=aux1;
+			}
+			aux1=aux1.getRight();
+		}
+		
+		
+		
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		addWindowListener(new WindowAdapter() {
 	        public void windowClosing(WindowEvent e) {
@@ -253,7 +274,8 @@ public class Tablero extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				Global.Reinicio();
 				validate();
-				//guardar partida en txt como partida nueva
+				Archivos.sobreescribir(a1.getPrimero(),true);
+				
 			}
 		});
 		btnReiniciarPartida.setBounds(894, 6, 424, 40);
@@ -271,7 +293,7 @@ public class Tablero extends JFrame implements ActionListener{
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//guardar juego
+				Archivos.sobreescribir(a1.getPrimero(),false);
 				setVisible(false);
 				dispose();
 			}
@@ -302,6 +324,7 @@ public class Tablero extends JFrame implements ActionListener{
 				break;
 				}
     	}
+		Archivos.sobreescribir(a1.getPrimero(),true);
 		validate();
 		
     }

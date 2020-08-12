@@ -102,4 +102,33 @@ public class Global {
 			else return;
 		}
 	}
+	
+	public static String conversorEstado(int valor){
+		switch(valor){
+		case 0: return "00"; 
+		case 2: return "01"; 
+		case 4: return "02";
+		case 8: return "03"; 
+		case 16: return "04"; 
+		case 32: return "05";
+		case 64: return "06"; 
+		case 128: return "07"; 
+		case 256: return "08";
+		case 512: return "09"; 
+		case 1024: return "10";
+		case 2048: return "11"; 
+		default: return "00";
+		}
+	}
+	
+	public static String estadoTablero(){
+		String movimiento="";
+		for (int i=0;i<=30;i++){
+			arbol.Buscar(arbol.getRaiz(), i).getValor();
+			movimiento+=conversorEstado(arbol.Buscar(arbol.getRaiz(), i).getValor());
+		}
+		return movimiento;
+	}
+	
+
 }
