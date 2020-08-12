@@ -15,12 +15,10 @@ public class Global {
 		if(log){
 			id=ID;
 			log=false;	
-			System.out.println("Click 1-"+id);
 		}
 		else
 			id2=ID;
 
-		System.out.println("Click 2-"+id2);
 	}	
 	public static void Flush(){
 		id=0;
@@ -90,16 +88,18 @@ public class Global {
 			if(aux.getLeft().isOcupado())
 			{
 				aux.setValor(aux.getLeft().getValor());
-				aux.getLeft().Vaciado();
 				aux = aux.getLeft();
+				aux.Vaciado();
 			} 
 			else if(aux.getRight().isOcupado())
 			{
 				aux.setValor(aux.getRight().getValor());
-				aux.getRight().Vaciado();
 				aux = aux.getRight();
+				aux.Vaciado();
 			} 
-			else return;
+			else 
+				break;
+			
 		}
 	}
 }

@@ -100,6 +100,7 @@ public class Nodo {
 	public void setValor(int valor) {
 		this.valor = valor;
 		cambiar(valor);
+		this.ocupado=true;
 	}
 	public void cambiar(int valor){
 		this.valor=valor;

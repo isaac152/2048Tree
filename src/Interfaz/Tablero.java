@@ -286,6 +286,7 @@ public class Tablero extends JFrame implements ActionListener{
 			if(cont<32){
 	    		Nodo graf = superarbolito.getArbol().Buscar(raiz, cont);
 	    		if (!graf.isOcupado()){	
+	    			System.out.println(cont);
 	    			graf.setValor(2);
 		    		Global.Flush();    	
 		    		graf.gbc_graf.gridx=graf.getPosx();
