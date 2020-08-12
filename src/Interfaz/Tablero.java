@@ -80,6 +80,17 @@ public class Tablero extends JFrame {
 		btnNewButton_1.setBounds(29, 299, 203, 96);
 		contentPane.add(btnNewButton_1);
 		
+		JButton btnRegistroUser = new JButton("registro user");
+		btnRegistroUser.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				RegistroUsuario a = new RegistroUsuario();
+				a.setVisible(true);
+			}
+		});
+		btnRegistroUser.setBounds(276, 90, 115, 61);
+		contentPane.add(btnRegistroUser);
+		
 
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setLocation(-29, -13);
