@@ -69,6 +69,7 @@ public class Global {
  	}
  	public static void Reinicio(){
  		score.setText("0");
+ 		arbol.getRaiz().setValor(2);
  		for(int i=2;i<32;i++){
     		Nodo graf = arbol.Buscar(arbol.getRaiz(), i);
     		graf.Vaciado();
