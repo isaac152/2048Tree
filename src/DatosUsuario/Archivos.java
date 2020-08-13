@@ -2,16 +2,27 @@ package DatosUsuario;
 
 import java.io.*;
 import java.util.Scanner;
+/**
+ * Clase que maneja la lectura y escritura de archivos.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
 
 public class Archivos {
-
+	/**
+	 * Constructor la clase de manejo de archivos.
+	 * */
 	public Archivos() {
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Escribe el nodo dado en el fichero de datos de usuario.
+	 * @param n = nodo a insertar.
+	 * */
 	public static void escribirFichero(NodoUsuario nodo) {
 		FileWriter flwriter = null;
-		try {//adem�s de la ruta del archivo recibe un par�metro de tipo boolean, que le indican que se va a�adir m�s registros 
+		try {
 			flwriter = new FileWriter("src//DatosUsuario//dataRegistro.txt",true);
 			BufferedWriter bfwriter = new BufferedWriter(flwriter);
 			bfwriter.write(nodo.getNombre() + ",");
@@ -34,7 +45,8 @@ public class Archivos {
 	}	
 	
 	/**
-	 * Lee un fichero binario de forma secuencial
+	 * Lee un fichero binario de forma secuencial, y agrega los datos obtenidos al arbol binario que maneja los datos de usuario.
+	 * @return usuarios = arbol conteniendo los usuarios
 	 */
 	public static ArbolUsuario leerFichero() {
 		
@@ -64,5 +76,24 @@ public class Archivos {
 		}
 		return usuarios;
 		
+	}
+	
+	public static void copiaArchivo(File fuente, String usuario) throws IOException {
+	    InputStream is = null;
+	    OutputStream os = null;
+	    try {
+	    	File copia = new File("src//Guardado//T"+usuario+".txt");
+	        is = new FileInputStream(fuente);
+	        os = new FileOutputStream(copia);
+	        byte[] buffer = new byte[1024];
+	        int length;
+	        while ((length = is.read(buffer)) > 0) {
+	            os.write(buffer, 0, length);
+	        }
+	    } finally {
+	        is.close();
+	        os.close();
+	    }
+	
 	}
 }
