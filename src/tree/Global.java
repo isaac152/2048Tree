@@ -1,6 +1,12 @@
 package tree;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Interfaz.Tablero;
+import Interfaz.Victoria;
 
 public class Global {
 	public static boolean log=true;
@@ -64,13 +70,29 @@ public class Global {
  		puntuacion=puntuacion+valor;
  		score.setText(String.valueOf(puntuacion));
  	}
+ 	private static void Victoria(int valor){
+ 		if (valor>=2048){
+ 			Victoria frame = new Victoria();
+ 			frame.setVisible(true);
+ 		}
+ 	}
  	private static void esferaMax(int valor){
  		int maxima = Integer.parseInt(maximoN.getText());
- 		if(valor>maxima)
- 			maximoN.setText(String.valueOf(valor));
+ 		if(valor>maxima){
+ 		ImageIcon icon = new ImageIcon(Tablero.class.getResource("/Imagenes/esfera"+valor+".png"));
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(maximoN.getHeight(), maximoN.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImc = new ImageIcon(newImg);
+        maximoN.setIcon(newImc);
+        maximoN.setText("");}
+ 		Victoria(valor);
+ 		
  	}
+ 	
+ 	
  	public static void Reinicio(){
  		score.setText("0");
+ 		
  		for(int i=2;i<32;i++){
     		Nodo graf = arbol.Buscar(arbol.getRaiz(), i);
     		graf.Vaciado();
@@ -102,4 +124,38 @@ public class Global {
 			else return;
 		}
 	}
+	
+	public static String conversorEstado(int valor){
+		switch(valor){
+		case 0: return "00"; 
+		case 2: return "01"; 
+		case 4: return "02";
+		case 8: return "03"; 
+		case 16: return "04"; 
+		case 32: return "05";
+		case 64: return "06"; 
+		case 128: return "07"; 
+		case 256: return "08";
+		case 512: return "09"; 
+		case 1024: return "10";
+		case 2048: return "11"; 
+		default: return "00";
+		}
+	}
+	
+	public static String estadoTablero(){
+		String movimientos="";
+		int i;
+		Nodo nodo=null;
+		for (i=1;i<=31;i++){
+			nodo=arbol.Buscar(arbol.getRaiz(), i);
+			if (nodo!=null){
+				movimientos+=String.valueOf(i)+"-"+nodo.getValor();
+			}
+			
+		}
+		return movimientos;
+	}
+	
+
 }

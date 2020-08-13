@@ -25,6 +25,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 
+import arbolScores.ArbolScores;
+import arbolScores.NodoScores;
+
+
 public class MenuInicial extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -53,7 +57,7 @@ public class MenuInicial extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuInicial() {
-		l1=principal.leerFichero();
+		l1=Archivos.leerFichero();
 		setResizable(false);
 		setBounds(100, 100, 349, 246);
 		getContentPane().setLayout(new BorderLayout());
@@ -120,7 +124,8 @@ public class MenuInicial extends JDialog {
 						aux = aux.getRight(); 
 					}
 					if (flag){
-						Tablero frame= new Tablero();
+								
+						Tablero frame= new Tablero(textUser.getText());
 						frame.setVisible(true);
 						setVisible(false);
 						dispose();
