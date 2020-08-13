@@ -1,6 +1,12 @@
 package tree;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Interfaz.Tablero;
+import Interfaz.Victoria;
 
 public class Global {
 	public static boolean log=true;
@@ -64,13 +70,29 @@ public class Global {
  		puntuacion=puntuacion+valor;
  		score.setText(String.valueOf(puntuacion));
  	}
+ 	private static void Victoria(int valor){
+ 		if (valor>=2048){
+ 			Victoria frame = new Victoria();
+ 			frame.setVisible(true);
+ 		}
+ 	}
  	private static void esferaMax(int valor){
  		int maxima = Integer.parseInt(maximoN.getText());
- 		if(valor>maxima)
- 			maximoN.setText(String.valueOf(valor));
+ 		if(valor>maxima){
+ 		ImageIcon icon = new ImageIcon(Tablero.class.getResource("/Imagenes/esfera"+valor+".png"));
+        Image img = icon.getImage();
+        Image newImg = img.getScaledInstance(maximoN.getHeight(), maximoN.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImc = new ImageIcon(newImg);
+        maximoN.setIcon(newImc);
+        maximoN.setText("");}
+ 		Victoria(valor);
+ 		
  	}
+ 	
+ 	
  	public static void Reinicio(){
  		score.setText("0");
+ 		
  		for(int i=2;i<32;i++){
     		Nodo graf = arbol.Buscar(arbol.getRaiz(), i);
     		graf.Vaciado();
@@ -122,12 +144,17 @@ public class Global {
 	}
 	
 	public static String estadoTablero(){
-		String movimiento="";
-		for (int i=0;i<=30;i++){
-			arbol.Buscar(arbol.getRaiz(), i).getValor();
-			movimiento+=conversorEstado(arbol.Buscar(arbol.getRaiz(), i).getValor());
+		String movimientos="";
+		int i;
+		Nodo nodo=null;
+		for (i=1;i<=31;i++){
+			nodo=arbol.Buscar(arbol.getRaiz(), i);
+			if (nodo!=null){
+				movimientos+=String.valueOf(i)+"-"+nodo.getValor();
+			}
+			
 		}
-		return movimiento;
+		return movimientos;
 	}
 	
 

@@ -70,10 +70,10 @@ public class Archivos {
 	}
 	
 	
-	public static void escribirFicheroScore(NodoScores nodo) {
+	public static void escribirFicheroScore(NodoScores nodo, String username) {
 		FileWriter flwriter = null;
 		try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros 
-			flwriter = new FileWriter("src//arbolScores//dataScores.txt",false);//false para poder sobreescribir
+			flwriter = new FileWriter("src//arbolScores//"+username+".txt",false);//false para poder sobreescribir
 			BufferedWriter bfwriter = new BufferedWriter(flwriter);
 			bfwriter.write(nodo.getUsername()+ ",");
 			bfwriter.write(nodo.getMov1() + ",");
@@ -95,11 +95,29 @@ public class Archivos {
 	}	
 	
 	/**
+	 * 
+	 * */
+	public static void crearArchivo(String username){
+	File file = new File("src//arbolScores//"+ username+ ".txt");
+	
+	try   
+	{  
+	file.createNewFile();  //creates a new file  
+	} 
+	catch (IOException e)   
+	{  
+	e.printStackTrace();    //prints exception if any  
+	}   }  
+	
+	
+	/**
 	 * Lee un fichero binario de forma secuencial
 	 */
-	public static ArbolScores leerFicheroScore() {
+	public static ArbolScores leerFicheroScore(String username) {
 		
-		File file = new File("src//arbolScores//dataScores.txt");
+		File file = new File("src//arbolScores//"+ username+ ".txt");
+		 
+		
 		ArbolScores scores = new ArbolScores();	
 		Scanner scanner;
 		try {
@@ -110,7 +128,7 @@ public class Archivos {
 				String linea = scanner.nextLine();
 				Scanner delimitar = new Scanner(linea);
 				//se usa una expresión regular que valida que antes o despues de una coma (,) exista cualquier cosa			
-				delimitar.useDelimiter("\\s*,\\s*");
+				delimitar.useDelimiter("\\s*\n\\s*");
 				NodoScores nodo= new NodoScores();
 				nodo.setUsername(delimitar.next());
 				nodo.setMov1(delimitar.next());
@@ -133,15 +151,15 @@ public class Archivos {
 	 * Escribe en un fichero los dos ultimos movimientos para sobreescribirlos en dataScores.txt
 	 */
 	
-	public static void escribirFicheroActual(NodoScores nodo) {
+	public static void escribirFicheroActual(NodoScores nodo,String username) {
 		FileWriter flwriter = null;
 		try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros 
-			flwriter = new FileWriter("src//arbolScores//dataScores.txt",false);//false permite sobreescribir la linea
+			flwriter = new FileWriter("src//arbolScores//"+username+".txt",false);//false permite sobreescribir la linea
 			BufferedWriter bfwriter = new BufferedWriter(flwriter);
-			bfwriter.write(nodo.getUsername()+ ",");
-			bfwriter.write(nodo.getMov1() + ",");
-			bfwriter.write(nodo.getMov2() + ",");
-			bfwriter.write(nodo.getHiscore() + ",");
+			bfwriter.write(nodo.getUsername()+ "\n");
+			bfwriter.write(nodo.getMov1() + "\n");
+			bfwriter.write(nodo.getMov2() + "\n");
+			bfwriter.write(nodo.getHiscore() + "\n");
 			bfwriter.write(nodo.getSumamax() +"\n");
 			bfwriter.close(); 
 		} catch (IOException e) {
@@ -163,10 +181,10 @@ public class Archivos {
 	// read file one line at a time
 	// replace line as you read the file and store updated lines in StringBuffer
 	// overwrite the file with the new lines
-	public static void replaceLines(String linea, String reemplazar) {
+	public static void replaceLines(String linea, String reemplazar, String username) {
 	    try {
 	        // input the (modified) file content to the StringBuffer "input"
-	        BufferedReader file = new BufferedReader(new FileReader("src//arbolScores//dataScores.txt"));
+	        BufferedReader file = new BufferedReader(new FileReader("src//arbolScores//"+username+".txt"));
 	        StringBuffer inputBuffer = new StringBuffer();
 
 	        while ((reemplazar = file.readLine()) != null) {
@@ -177,24 +195,24 @@ public class Archivos {
 	        file.close();
 
 	        // write the new string with the replaced line OVER the same file
-	        FileOutputStream fileOut = new FileOutputStream("src//arbolScores//dataScores.txt");
+	        FileOutputStream fileOut = new FileOutputStream("src//arbolScores//"+username+".txt");
 	        fileOut.write(inputBuffer.toString().getBytes());
 	        fileOut.close();
 
 	    } catch (Exception e) {
-	        System.out.println("Error leyendo el archivo 'dataScores.txt'.");
+	        System.out.println("Error leyendo el archivo.");
 	    }
 	}
 	
-	public static void sobreescribir(NodoScores nodo, boolean reinicio){
-		ArbolScores arbol=leerFicheroScore();
+	public static void sobreescribir(NodoScores nodo, boolean reinicio,String username){
+		ArbolScores arbol=leerFicheroScore(username);
 		boolean flag = false;
 		NodoScores aux = arbol.getPrimero();
-		System.out.println(nodo.getUsername());
-		String linea="", linea2=nodo.getUsername()+","+"00000000000000000000000000000000000000000000000000000000000000,00000000000000000000000000000000000000000000000000000000000000"+","+Global.score.getText()+","+Global.maximoN.getText()+"\n";
+		String linea="", linea2=username+"\n"+"1-2\n"+Global.score.getText()+"\n"+Global.maximoN.getText()+"\n";
 		while(aux != null){
-			if (nodo.getUsername().equals(aux.getUsername())){
-					linea=nodo.getUsername()+","+nodo.getMov1()+","+nodo.getMov2()+","+nodo.getHiscore()+","+nodo.getSumamax()+"\n";
+			if (username.equals(aux.getUsername())){
+					//linea=nodo.getUsername()+"\n"+"1-2"+"\n"+nodo.getHiscore()+"\n"+nodo.getSumamax()+"\n";
+					linea="";
 					flag=true;
 					break;
 				
@@ -204,9 +222,10 @@ public class Archivos {
 		
 		if (flag){
 			if (!reinicio){
-				linea2=nodo.getUsername()+","+Global.estadoTablero()+","+nodo.getMov1()+","+Global.score.getText()+","+Global.maximoN+"\n";
+				//linea2=nodo.getUsername()+","+Global.estadoTablero()+","+nodo.getMov1()+","+Global.score.getText()+","+Global.maximoN+"\n";
+				linea2="hola";
 			}
-			replaceLines(linea2,linea);
+			replaceLines(linea2,linea,username);
 		}
 	}
 	
