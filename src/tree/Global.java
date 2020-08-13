@@ -9,14 +9,16 @@ import Interfaz.Tablero;
 import Interfaz.Victoria;
 import javax.swing.JOptionPane;
 
+import Guardado.ArchivoDatos;
+
 public class Global {
 	public static boolean log=true;
 	public static int id=0;
 	public static int id2=0;
 	public static Arbol arbol;
 	public static JLabel score = new JLabel("0");
-	public static JLabel maximoN = new JLabel("0");
-	public static int max= 2;
+	public static JLabel maximoN = new JLabel("2");
+	public static String usuario;
 	
 	public static void Click (int ID){
 		if(log){
@@ -62,6 +64,8 @@ public class Global {
  			Promocion(n1);
  	 		sumandoScore(n2.getValor());
  	 		esferaMax(n2.getValor());
+ 	 		ArchivoDatos.crearArchivo(usuario);
+
  		}
  		Flush();
  	}
@@ -77,6 +81,7 @@ public class Global {
  		if(valor>maxima){
  			String direccion= Nodo.asignarImagen(valor);
  			maximoN.setIcon(new ImageIcon(Tablero.class.getResource(direccion)));
+ 			maximoN.setText(String.valueOf(valor));
         }
  		Victoria(valor);
  		

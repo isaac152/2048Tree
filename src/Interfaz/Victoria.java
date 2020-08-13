@@ -52,7 +52,7 @@ public class Victoria extends JDialog {
 		JLabel lblVictoria = new JLabel("VICTORIA");
 		lblVictoria.setForeground(new Color(255, 160, 122));
 		lblVictoria.setFont(new Font("Myriad Pro Light", Font.PLAIN, 50));
-		lblVictoria.setBounds(113, 62, 208, 103);
+		lblVictoria.setBounds(113, 62, 275, 103);
 		contentPanel.add(lblVictoria);
 		{
 			JLabel label = new JLabel("");

@@ -51,14 +51,6 @@ public class Nodo {
 		this.clave = clave;
 	}
 
-	public int getSize() {
-		return nivel;
-	}
-
-	public void setSize(int size) {
-		this.nivel = size;
-	}
-
 	public Nodo getLeft() {
 		return left;
 	}

@@ -4,6 +4,8 @@ import tree.Nodo;
 import tree.Global;
 
 import DatosUsuario.Archivos;
+import Guardado.ArchivoDatos;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -115,7 +117,7 @@ public class Tablero extends JFrame implements ActionListener{
 		lblHiscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		contentPane.add(lblHiscore);
 		
-		JLabel lblHiscoreVar = new JLabel("???");
+		JLabel lblHiscoreVar = new JLabel("???ss");
 		lblHiscoreVar.setBounds(311, 29, -2, 14);
 		contentPane.add(lblHiscoreVar);
 		Global.maximoN.setBounds(15, 1, 66, 66);
@@ -290,6 +292,7 @@ public class Tablero extends JFrame implements ActionListener{
 		    		Pintarcontenedor(graf.getNivel(),graf);
 		    		graf.setOcupado(true);
 	    			log=false;
+	     	 		ArchivoDatos.crearArchivo(Global.usuario);
 	    		}
 	    		else
 	    			cont++;

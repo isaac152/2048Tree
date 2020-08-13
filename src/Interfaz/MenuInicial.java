@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import DatosUsuario.ArbolUsuario;
 import DatosUsuario.Archivos;
 import DatosUsuario.NodoUsuario;
+import tree.Global;
 
 import java.awt.Color;
 import javax.swing.JLabel;
@@ -121,6 +122,7 @@ public class MenuInicial extends JDialog {
 					}
 					if (flag){
 						Tablero frame= new Tablero();
+						Global.usuario=aux.getUsername();
 						frame.setVisible(true);
 						setVisible(false);
 						dispose();
