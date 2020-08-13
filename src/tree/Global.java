@@ -212,21 +212,5 @@ public class Global {
 			
 		}
 	}
-	/**
-	 * Verifica la condicion de derrota.
-	 * @param raiz = nodo raiz del arbol de juego.*/
-	public static void Derrota(Nodo raiz){
-		//primo1.getvalor!=primo2.getvalor && padre.getvalor!=hijo.getvalor
-		if ((raiz.getLeft().getValor()==raiz.getRight().getValor())||(raiz.getValor()==raiz.getLeft().getValor())||(raiz.getValor()==raiz.getRight().getValor())){
-			return; //no se ha perdido
-			
-		}
-		if(!(arbol.countChildren(raiz)<=30)){
-		
-			Derrota(raiz.getLeft());
-			Derrota(raiz.getRight());
-			JOptionPane.showMessageDialog(null, "Perdiste :(\nSe reiniciará el juego.");
-			Reinicio();}
-		
-	}
+	
 }
