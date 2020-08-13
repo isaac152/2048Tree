@@ -24,6 +24,11 @@ import javax.swing.JPasswordField;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**Clase que maneja la interfaz de registro de usuarios.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G*/
+
 public class RegistroUsuario extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -52,6 +57,10 @@ public class RegistroUsuario extends JDialog {
 	}
 	
 	@SuppressWarnings("deprecation")
+	/**
+	 * Evita que se marquen ciertos caracteres.
+	 * @param e = tecla presionada
+	 * */
 	private void verificarTecla(KeyEvent e){
 		char caracter = e.getKeyChar();
 		if ((!Character.isLetter(caracter))&&(!Character.isSpace(caracter)))
@@ -59,6 +68,10 @@ public class RegistroUsuario extends JDialog {
 			//finaliza este evento para que la fuente que lo origino no lo procese de la manera determinada como si no hubiera presionado la tecla
 	}
 	
+	/**
+	 * Verifica que se haya insertado un email válido.
+	 * @param email = email introducido
+	 * */
 	private boolean verificarEmail(String email){
 		// Patrï¿½n para validar el email
 		Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -123,6 +136,10 @@ public class RegistroUsuario extends JDialog {
 			textNombre = new JTextField();
 			textNombre.addKeyListener(new KeyAdapter() {
 				@Override
+				/**
+				 * Verifica que la tecla presionada sea aceptable.
+				 * @param e = tecla presionada
+				 * */
 				public void keyTyped(KeyEvent e) {
 					verificarTecla(e);				
 				}
@@ -134,6 +151,10 @@ public class RegistroUsuario extends JDialog {
 			textApellido = new JTextField();
 			textApellido.addKeyListener(new KeyAdapter() {
 				@Override
+				/**
+				 * Verifica que la tecla presionada sea aceptable.
+				 * @param e = tecla presionada
+				 * */
 				public void keyTyped(KeyEvent e) {
 					verificarTecla(e);				
 				}
@@ -210,6 +231,10 @@ public class RegistroUsuario extends JDialog {
 				btnRegistrar.addMouseListener(new MouseAdapter() {
 					@SuppressWarnings("deprecation")
 					@Override
+					/**
+					 * Realiza el registro de usuario y la verificación de todos los datos.
+					 * @param e = click
+					 * */
 					public void mouseClicked(MouseEvent e) {
 						lblErrorNombre.setVisible(false);
 						lblErrorApellido.setVisible(false);
@@ -334,6 +359,11 @@ public class RegistroUsuario extends JDialog {
 				JButton btnCancelar = new JButton("Cancelar");
 				btnCancelar.addMouseListener(new MouseAdapter() {
 					@Override
+					/**
+					 * Cierra la ventana y regresa al menu de inicio.
+					 * @param e = click
+					 * */
+
 					public void mouseClicked(MouseEvent e) {
 						setVisible(false); //you can't see me!
 						MenuInicial a = new MenuInicial();

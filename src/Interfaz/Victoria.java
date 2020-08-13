@@ -14,6 +14,13 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Clase que genera el anuncio de condición de victoria.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
+
 public class Victoria extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -68,6 +75,8 @@ public class Victoria extends JDialog {
 			{
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
+					/**Cierra la ventana.
+					 * @param arg0 = accion realizada sobre el boton*/
 					public void actionPerformed(ActionEvent arg0) {
 						setVisible(false);
 						dispose();

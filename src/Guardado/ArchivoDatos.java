@@ -6,9 +6,14 @@ import java.util.Scanner;
 import Interfaz.Tablero;
 import tree.Global;
 import tree.Nodo;
-
+/**Clase que maneja el guardado de datos de partida.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G*/
 public class ArchivoDatos {
-	
+	/**
+	 * Crea el archivo de partida de cada usuario.
+	 * @param usuario = nombre de usuario*/
 	public static void crearArchivo(String usuario) {
 		FileWriter flwriter = null;
 		try {
@@ -42,6 +47,10 @@ public class ArchivoDatos {
 			}
 		}
 	}
+	/**
+	 * Lee el archivo de usuario y obtiene las variables para el juego.
+	 * @param usuario = nombre de usuario
+	 * @param log = verifica si se esta deshaciendo el movimiento*/
 		public static void leerFichero(String usuario,boolean log) {
 		File file =null;
 		if (log){
@@ -77,6 +86,8 @@ public class ArchivoDatos {
 		
 		
 	}
+		/**Copia el ultimo movimiento realizado en un archivo nuevo.
+		 * @param usuario = nombre de usuario*/
 	public static void copiaUltimo(String usuario) {
 		FileWriter flwriter = null;
 		try {
@@ -105,14 +116,45 @@ public class ArchivoDatos {
 		}
 		
 	}
+	/**Verifica si el archivo esta vacio.
+	 * @param usuario = nombre de usuario
+	 * @return true si es vacio
+	 * @return false si no lo es*/
 	public static boolean archivoVacio(String usuario){
 		File newFile = new File(usuario+".txt"); 
 		if (newFile.length() == 0) { return true;} 
 		else { return false; }
 
 	}
+	/**Verifica si el archivo existe.
+	 * @param usuario = nombre de usuario
+	 * @return true si existe
+	 * @return false si no existe*/
 	public static boolean archivoExiste(String usuario){
 		File tmpDir = new File("src//Guardado//"+usuario+".txt");
 		return tmpDir.exists();
 	}
+	
+	/**Copia el archivo dado en el archivo T(username)
+	 * @param fuente = archivo a copiar
+	 * @param usuario = nombre de usuario*/
+	public static void copiaArchivo(File fuente, String usuario) throws IOException {
+		    InputStream is = null;
+		    OutputStream os = null;
+		    try {
+		    	File copia = new File("src//Guardado//T"+usuario+".txt");
+		        is = new FileInputStream(fuente);
+		        os = new FileOutputStream(copia);
+		        byte[] buffer = new byte[1024];
+		        int length;
+		        while ((length = is.read(buffer)) > 0) {
+		            os.write(buffer, 0, length);
+		        }
+		    } finally {
+		        is.close();
+		        os.close();
+		    }
+		
+		}
+	
 }
