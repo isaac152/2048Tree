@@ -183,7 +183,7 @@ public class Global {
 	public static void Derrota(Nodo raiz){
 		//primo1.getvalor!=primo2.getvalor && padre.getvalor!=hijo.getvalor
 		if ((raiz.getLeft().getValor()==raiz.getRight().getValor())||(raiz.getValor()==raiz.getLeft().getValor())||(raiz.getValor()==raiz.getRight().getValor())){
-			JOptionPane.showMessageDialog(null, "No has perdido :o");
+			JOptionPane.showMessageDialog(null, "No has perdido :o)");
 			return; //no se ha perdido
 			
 		}
@@ -191,7 +191,7 @@ public class Global {
 		
 			Derrota(raiz.getLeft());
 			Derrota(raiz.getRight());
-			JOptionPane.showMessageDialog(null, "Perdiste por gafo ;)");
+			JOptionPane.showMessageDialog(null, "Perdiste por gafo ;o)");
 			Reinicio();}
 		
 	}
