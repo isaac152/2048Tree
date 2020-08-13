@@ -5,6 +5,8 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 /**
  * Clase que maneja los contenedores para cada fila del tablero.
+ * @author Daniela E
+ * @author Katherine M
  * @author Isaac G
  * */
 public class Contenedor {

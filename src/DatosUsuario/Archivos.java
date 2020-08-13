@@ -260,7 +260,17 @@ public class Archivos {
 		}
 	}
 	
+	public static boolean archivoVacio(){
+		File newFile = new File("archivo.txt"); 
+		if (newFile.length() == 0) { return true;} //archivo vacio
+		else { return false; }//archivo no vacio
 
+	}
+	
+	public static boolean archivoExiste(){
+		File tmpDir = new File("ubicacion de archivo");
+		return tmpDir.exists();
+	}
 	
 	
 }

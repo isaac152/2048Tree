@@ -13,7 +13,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Clase que genera el anuncio de condición de victoria.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
 public class Victoria extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();

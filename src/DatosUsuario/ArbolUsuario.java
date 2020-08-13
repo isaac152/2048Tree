@@ -2,6 +2,8 @@ package DatosUsuario;
 /**
  * Arbol binario que maneja los datos de los usuarios.
  * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
  * */
 public class ArbolUsuario {
 		

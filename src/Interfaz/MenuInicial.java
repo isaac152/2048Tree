@@ -30,8 +30,9 @@ import arbolScores.NodoScores;
 
 /**
  * Clase que maneja el menu de inicio de sesión.
- * @author Katherine M.
- * @author Daniela E.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
  * */
 public class MenuInicial extends JDialog {
 
@@ -114,6 +115,10 @@ public class MenuInicial extends JDialog {
 			contentPanel.add(btnIngresar);
 			btnIngresar.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Verifica que los datos ingresados sean válidos.
+				 * @param e = click al botón
+				 * */
 				public void mouseClicked(MouseEvent e) {
 					boolean flag = false;
 					NodoUsuario aux = l1.getPrimero();

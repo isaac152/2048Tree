@@ -3,6 +3,8 @@ package DatosUsuario;
 /**
  * Clase que establece los nodos del arbol binario que maneja los datos de usuario.
  * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
  * */
 public class NodoUsuario {
 	private String nombre;

@@ -6,7 +6,9 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 /**Clase que controla la generación de los conectores entre esferas.
- * @author Isaac G.*/
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G*/
 public class Palito {
 	GridBagConstraints gbc_label= new GridBagConstraints();
 	JLabel label = new JLabel("");

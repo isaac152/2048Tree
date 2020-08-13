@@ -2,8 +2,9 @@ package arbolScores;
 
 /**
  * Arbol binario que maneja los puntajes y partidas.
- * @author Katherine M
  * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
  * */
 public class ArbolScores {
 
