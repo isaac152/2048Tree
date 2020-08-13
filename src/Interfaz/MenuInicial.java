@@ -26,6 +26,13 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JPasswordField;
 
+/**
+ * Clase que maneja el menu de inicio de sesión.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
+
 public class MenuInicial extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
@@ -106,6 +113,9 @@ public class MenuInicial extends JDialog {
 			contentPanel.add(btnIngresar);
 			btnIngresar.addMouseListener(new MouseAdapter() {
 				@Override
+				/**
+				 * Verifica que los datos introducidos sean apropiados y permite el inicio de sesion.
+				 * @param e = click*/
 				public void mouseClicked(MouseEvent e) {
 					boolean flag = false;
 					NodoUsuario aux = l1.getPrimero();
@@ -143,6 +153,11 @@ public class MenuInicial extends JDialog {
 			
 			JButton btnRegistrarUsuario = new JButton("Registrar Usuario");
 			btnRegistrarUsuario.addActionListener(new ActionListener() {
+				/**
+				 * Muestra la ventana de registro de usuario nuevo.
+				 * @param arg0 = cualquier accion sobre el boton
+				 * */
+				
 				public void actionPerformed(ActionEvent arg0) {
 					setVisible(false);
 					RegistroUsuario a = new RegistroUsuario();
@@ -155,6 +170,10 @@ public class MenuInicial extends JDialog {
 			{
 				JButton btnSalir = new JButton("Salir");
 				btnSalir.addActionListener(new ActionListener() {
+					/**
+					 * Sale del programa.
+					 * @param arg0 = cualquier accion sobre el boton
+					 * */
 					public void actionPerformed(ActionEvent arg0) {
 						System.exit(0);
 					}

@@ -40,6 +40,12 @@ import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 import javax.swing.border.LineBorder;
 import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
+/**
+ * Clase que genera el tablero de juego.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
 
 public class Tablero extends JFrame implements ActionListener{
 
@@ -81,24 +87,15 @@ public class Tablero extends JFrame implements ActionListener{
 			ArchivoDatos.leerFichero(Global.usuario,true);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		addWindowListener(new WindowAdapter() {
+			/**Cierre de ventana.
+			 * @param e = click*/
 	        public void windowClosing(WindowEvent e) {
 	        	//guardar datos
 	        	setVisible(false);
 	            dispose();
 	            System.out.println(";)");
 	        }
-	    });
-		
-		setExtendedState(Frame.MAXIMIZED_BOTH);
-		addWindowListener(new WindowAdapter() {
-	        public void windowClosing(WindowEvent e) {
-	        	//guardar datos
-	        	setVisible(false);
-	            dispose();
-	            System.out.println(";)");
-	        }
-	    });
-		
+	    });		
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -241,7 +238,10 @@ public class Tablero extends JFrame implements ActionListener{
 		raiz.gbc_graf.gridx=1;
 		nivel0.panel.add(raiz.labelNodo, raiz.gbc_graf);
 			
-		
+		/**
+		 * Reinicia la partida.
+		 * @param e = acción realizada.
+		 * */
 		JButton btnReiniciarPartida = new JButton("Reiniciar Partida");
 		btnReiniciarPartida.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,6 +274,10 @@ public class Tablero extends JFrame implements ActionListener{
 		contentPane.add(label);
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Cierra la ventana.
+			 * @param arg0 = click en ventana*/
+
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false);
 				dispose();
@@ -282,6 +286,9 @@ public class Tablero extends JFrame implements ActionListener{
 
 		
 	}
+	/**
+	 * Crea un nodo.
+	 * @param evt = accion realizada.*/
     public void actionPerformed(ActionEvent evt) {
     	Boolean log= true;
     	int cont=1;
@@ -295,6 +302,7 @@ public class Tablero extends JFrame implements ActionListener{
 		    		Pintarcontenedor(graf.getNivel(),graf);
 	    			log=false;
 	     	 		ArchivoDatos.crearArchivo(Global.usuario);
+	     	 		Global.Derrota(Global.arbol.getRaiz());
 	    		}
 	    		else
 	    			cont++;
@@ -308,6 +316,7 @@ public class Tablero extends JFrame implements ActionListener{
 		validate();
 		
     }
+    /**Dibuja el nodo en el tablero.*/
     public static void Pintarcontenedor(int nivel,Nodo graf){
     	switch(nivel){
     	case 1:
@@ -323,5 +332,6 @@ public class Tablero extends JFrame implements ActionListener{
     		nivel4.panel.add(graf.labelNodo, graf.gbc_graf);
     		break;
     	}
+    	
     }
 }
