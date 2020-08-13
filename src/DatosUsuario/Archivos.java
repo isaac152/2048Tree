@@ -1,17 +1,29 @@
 package DatosUsuario;
 
 import java.io.*;
+
 import java.util.Scanner;
 
 import arbolScores.ArbolScores;
 import arbolScores.NodoScores;
 import tree.Global;
+/**
+ * Clase que maneja la lectura y escritura de archivos.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
 public class Archivos {
-
+	/**
+	 * Constructor la clase de manejo de archivos.
+	 * */
 	public Archivos() {
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * Escribe el nodo dado en el fichero de datos de usuario.
+	 * @param n = nodo a insertar.
+	 * */
 	public static void escribirFichero(NodoUsuario nodo) {
 		FileWriter flwriter = null;
 		try {//ademï¿½s de la ruta del archivo recibe un parï¿½metro de tipo boolean, que le indican que se va aï¿½adir mï¿½s registros 
@@ -37,7 +49,8 @@ public class Archivos {
 	}	
 	
 	/**
-	 * Lee un fichero binario de forma secuencial
+	 * Lee un fichero binario de forma secuencial, y agrega los datos obtenidos al arbol binario que maneja los datos de usuario.
+	 * @return usuarios = arbol conteniendo los usuarios
 	 */
 	public static ArbolUsuario leerFichero() {
 		
@@ -70,6 +83,11 @@ public class Archivos {
 	}
 	
 	
+	/**
+	 * Escribe el nodo dado en el fichero de puntajes.
+	 * @param n = nodo a insertar.
+	 * @param username = nombre de usuario.
+	 * */
 	public static void escribirFicheroScore(NodoScores nodo, String username) {
 		FileWriter flwriter = null;
 		try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros 
@@ -95,7 +113,8 @@ public class Archivos {
 	}	
 	
 	/**
-	 * 
+	 * Crea el archivo de puntajes del usuario dado.
+	 * @param username = nombre de usuario.
 	 * */
 	public static void crearArchivo(String username){
 	File file = new File("src//arbolScores//"+ username+ ".txt");
@@ -111,8 +130,11 @@ public class Archivos {
 	
 	
 	/**
-	 * Lee un fichero binario de forma secuencial
-	 */
+	 * Lee el fichero de puntajes de un usuario dado.
+	 * Agrega los datos obtenidos al arbol de puntajes.
+	 * @param username = nombre de usuario.
+	 * @return scores = album de puntajes.
+	 * */
 	public static ArbolScores leerFicheroScore(String username) {
 		
 		File file = new File("src//arbolScores//"+ username+ ".txt");
@@ -149,8 +171,9 @@ public class Archivos {
 	
 	/**
 	 * Escribe en un fichero los dos ultimos movimientos para sobreescribirlos en dataScores.txt
+	 * @param nodo = nodo del dato a reemplazar
+	 * @param username = nombre de usuario
 	 */
-	
 	public static void escribirFicheroActual(NodoScores nodo,String username) {
 		FileWriter flwriter = null;
 		try {//además de la ruta del archivo recibe un parámetro de tipo boolean, que le indican que se va añadir más registros 
@@ -177,10 +200,11 @@ public class Archivos {
 	
 	/**
 	 * Sobreescribe la linea cada movimiento
+	 * @param linea = linea que sobreescrible
+	 * @param reemplazar = linea a sobreescribir
+	 * @param username = nombre de usuario
 	 * */
-	// read file one line at a time
-	// replace line as you read the file and store updated lines in StringBuffer
-	// overwrite the file with the new lines
+	
 	public static void replaceLines(String linea, String reemplazar, String username) {
 	    try {
 	        // input the (modified) file content to the StringBuffer "input"
@@ -204,6 +228,13 @@ public class Archivos {
 	    }
 	}
 	
+	
+	/**
+	 * Sobreescribe lineas en el fichero de un usuario dado.
+	 * @param nodo = nodo con los datos actuales.
+	 * @param reinicio = verifica si el tablero se está reiniciando o no.
+	 * @param username = nombre de usuario.
+	 * */
 	public static void sobreescribir(NodoScores nodo, boolean reinicio,String username){
 		ArbolScores arbol=leerFicheroScore(username);
 		boolean flag = false;
@@ -229,7 +260,17 @@ public class Archivos {
 		}
 	}
 	
+	public static boolean archivoVacio(){
+		File newFile = new File("archivo.txt"); 
+		if (newFile.length() == 0) { return true;} //archivo vacio
+		else { return false; }//archivo no vacio
 
+	}
+	
+	public static boolean archivoExiste(){
+		File tmpDir = new File("ubicacion de archivo");
+		return tmpDir.exists();
+	}
 	
 	
 }

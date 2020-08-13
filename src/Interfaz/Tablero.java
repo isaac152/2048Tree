@@ -36,7 +36,12 @@ import java.awt.event.WindowEvent;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 import javax.swing.border.LineBorder;
-
+/**
+ * Clase que genera el tablero de juego.
+ * @author Daniela E
+ * @author Katherine M
+ * @author Isaac G
+ * */
 public class Tablero extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
@@ -93,6 +98,8 @@ public class Tablero extends JFrame implements ActionListener{
 		
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		addWindowListener(new WindowAdapter() {
+			/**Cierre de ventana.
+			 * @param e = click*/
 	        public void windowClosing(WindowEvent e) {
 	        	//guardar datos
 	        	setVisible(false);
@@ -112,6 +119,10 @@ public class Tablero extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		JLabel lblHiscoreVar = new JLabel("???");
+		lblHiscoreVar.setBounds(260, 30, 74, 14);
+		contentPane.add(lblHiscoreVar);
+		
 		JLabel lblscore = new JLabel("Score");
 		lblscore.setBounds(180, 5, 36, 18);
 		lblscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
@@ -123,10 +134,6 @@ public class Tablero extends JFrame implements ActionListener{
 		lblHiscore.setBounds(251, 5, 68, 18);
 		lblHiscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		contentPane.add(lblHiscore);
-		
-		JLabel lblHiscoreVar = new JLabel("???");
-		lblHiscoreVar.setBounds(311, 29, -2, 14);
-		contentPane.add(lblHiscoreVar);
 		Global.maximoN.setBounds(15, 1, 60, 60);
 		
 		ImageIcon icon = new ImageIcon(Tablero.class.getResource("/Imagenes/esfera2.png"));
@@ -135,6 +142,15 @@ public class Tablero extends JFrame implements ActionListener{
         ImageIcon newImc = new ImageIcon(newImg);
         Global.maximoN.setIcon(newImc);
 		contentPane.add(Global.maximoN);
+		
+		JButton btnCondDerr = new JButton("cond. derr");
+		btnCondDerr.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Global.Derrota(superarbolito.getRaiz());
+			}
+		});
+		btnCondDerr.setBounds(609, 26, 89, 23);
+		contentPane.add(btnCondDerr);
 		
 		JButton btnCrear = new JButton("A\u00F1adir Esfera");
 		btnCrear.setBounds(376, 15, 141, 23);
@@ -252,6 +268,10 @@ public class Tablero extends JFrame implements ActionListener{
 		
 		JButton btnReiniciarPartida = new JButton("Reiniciar Partida");
 		btnReiniciarPartida.addActionListener(new ActionListener() {
+			/**
+			 * Reinicia la partida.
+			 * @param e = acción realizada.
+			 * */
 			public void actionPerformed(ActionEvent e) {
 				Global.Reinicio();
 				validate();
@@ -283,6 +303,8 @@ public class Tablero extends JFrame implements ActionListener{
 		contentPane.add(label);
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Guarda los datos antes de cerrar.*/
 			public void mouseClicked(MouseEvent arg0) {
 				Archivos.sobreescribir(a1.getPrimero(),false,user);
 				System.out.println("overwrite");
@@ -293,6 +315,8 @@ public class Tablero extends JFrame implements ActionListener{
 
 		
 	}
+	
+	/**Crea un nodo.*/
     public void actionPerformed(ActionEvent evt) {
     	Boolean log= true;
     	int cont=1;
@@ -321,6 +345,9 @@ public class Tablero extends JFrame implements ActionListener{
 		validate();
 		
     }
+    /**
+     * Dibuja los nodos en el tablero.
+     * */
     public void Pintarcontenedor(int nivel,Nodo graf){
     	switch(nivel){
     	case 1:
