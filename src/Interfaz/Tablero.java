@@ -84,8 +84,7 @@ public class Tablero extends JFrame implements ActionListener{
 	public Tablero() {
 		Global.setArbol(superarbolito.getArbol());
 		if((ArchivoDatos.archivoExiste(Global.usuario))&&(ArchivoDatos.archivoVacio(Global.usuario)))
-			{ArchivoDatos.leerFichero(Global.usuario,true);
-			System.out.println("aa");}
+			ArchivoDatos.leerFichero(Global.usuario,true);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		addWindowListener(new WindowAdapter() {
 			/**Cierre de ventana.
@@ -259,6 +258,12 @@ public class Tablero extends JFrame implements ActionListener{
 		
 		
 		JButton btnDeshacerMovimiento = new JButton("Deshacer Movimiento");
+		btnDeshacerMovimiento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				if((ArchivoDatos.archivoExiste("T"+Global.usuario)))
+					ArchivoDatos.leerFichero(Global.usuario,false);}
+		});
 		btnDeshacerMovimiento.setBounds(22, 6, 424, 40);
 		MenuInf.add(btnDeshacerMovimiento);
 		JButton btnSalir = new JButton("Salir");

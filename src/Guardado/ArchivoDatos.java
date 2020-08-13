@@ -1,6 +1,10 @@
 package Guardado;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.Scanner;
 
 import Interfaz.Tablero;
@@ -90,15 +94,32 @@ public class ArchivoDatos {
 		/**Copia el ultimo movimiento realizado en un archivo nuevo.
 		 * @param usuario = nombre de usuario
 		 * @throws FileNotFoundException */
-	public static void copiaUltimo(String usuario) throws FileNotFoundException {
-		PrintWriter escribir = new PrintWriter("T"+usuario+".txt");
-		File f = new File("src//Guardado//T"+usuario+".txt");
-		Scanner leer = new Scanner(f);
-		while(leer.hasNext())
-			escribir.println(leer.nextLine());
-		escribir.close();
-		leer.close();
-	}
+		public static void copiaArchivo(String usuario){		    
+	    	//crea el archivo
+	    	FileWriter flwriter = null;
+	    	try {
+				flwriter = new FileWriter("src//Guardado//T"+usuario+".txt",false);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	try {
+				flwriter.close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	//copia el archivo
+	    	Path pcopia = FileSystems.getDefault().getPath("src//Guardado//T"+usuario+".txt");
+	    	Path pfuente = FileSystems.getDefault().getPath("src//Guardado//"+usuario+".txt");
+	    	try {
+				Files.copy(pfuente, pcopia, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+}
 	/**Verifica si el archivo esta vacio.
 	 * @param usuario = nombre de usuario
 	 * @return true si es vacio

@@ -97,7 +97,9 @@ public class Global {
  			Promocion(n1);
  	 		sumandoScore(n2.getValor());
  	 		esferaMax(n2.getValor());
- 	 	
+			if(ArchivoDatos.archivoExiste(usuario)){
+				ArchivoDatos.copiaArchivo(usuario);
+			} 	 	
 				ArchivoDatos.crearArchivo(usuario);
 
 
