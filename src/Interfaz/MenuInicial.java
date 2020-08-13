@@ -28,7 +28,11 @@ import javax.swing.JPasswordField;
 import arbolScores.ArbolScores;
 import arbolScores.NodoScores;
 
-
+/**
+ * Clase que maneja el menu de inicio de sesión.
+ * @author Katherine M.
+ * @author Daniela E.
+ * */
 public class MenuInicial extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
