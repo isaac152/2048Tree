@@ -307,6 +307,9 @@ public class Tablero extends JFrame implements ActionListener{
 		    		graf.gbc_graf.gridx=graf.getPosx();
 		    		Pintarcontenedor(graf.getNivel(),graf);
 	    			log=false;
+	    			if(ArchivoDatos.archivoExiste(Global.usuario)){
+	    				ArchivoDatos.copiaArchivo(Global.usuario);
+	    			} 	
 						ArchivoDatos.crearArchivo(Global.usuario);
 
 	    		}
