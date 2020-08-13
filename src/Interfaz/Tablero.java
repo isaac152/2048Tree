@@ -34,6 +34,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 import javax.swing.border.LineBorder;
@@ -42,13 +44,13 @@ import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 public class Tablero extends JFrame implements ActionListener{
 
 	private JPanel contentPane;
-	ArbolSupremo superarbolito = new ArbolSupremo();
+	static ArbolSupremo superarbolito = new ArbolSupremo();
 	Nodo raiz= superarbolito.getRaiz();
-	Contenedor nivel0= new Contenedor();
-	Contenedor nivel1 = new Contenedor();
-	Contenedor nivel2 = new Contenedor();
-	Contenedor nivel3 = new Contenedor();
-	Contenedor nivel4 = new Contenedor();
+	static Contenedor nivel0= new Contenedor();
+	static Contenedor nivel1 = new Contenedor();
+	static Contenedor nivel2 = new Contenedor();
+	static Contenedor nivel3 = new Contenedor();
+	static Contenedor nivel4 = new Contenedor();
 	Contenedor varas1=new Contenedor();
 	Contenedor varas2=new Contenedor();
 	Contenedor varas3=new Contenedor();
@@ -74,6 +76,9 @@ public class Tablero extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public Tablero() {
+		Global.setArbol(superarbolito.getArbol());
+		if((ArchivoDatos.archivoExiste(Global.usuario))&&!(ArchivoDatos.archivoVacio(Global.usuario)))
+			ArchivoDatos.leerFichero(Global.usuario,true);
 		setExtendedState(Frame.MAXIMIZED_BOTH);
 		addWindowListener(new WindowAdapter() {
 	        public void windowClosing(WindowEvent e) {
@@ -112,17 +117,16 @@ public class Tablero extends JFrame implements ActionListener{
 		Global.score.setBounds(180, 25, 36, 18);
 		contentPane.add(Global.score);
 		
-		JLabel lblHiscore = new JLabel("HIGH score");
+		JLabel lblHiscore = new JLabel("High score");
 		lblHiscore.setBounds(251, 5, 108, 18);
 		lblHiscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
 		contentPane.add(lblHiscore);
 		
-		JLabel lblHiscoreVar = new JLabel("???ss");
-		lblHiscoreVar.setBounds(311, 29, -2, 14);
-		contentPane.add(lblHiscoreVar);
+		Global.highScore.setBounds(260, 30, 74, 14);
+		contentPane.add(Global.highScore);
 		Global.maximoN.setBounds(15, 1, 66, 66);
 
-		Global.maximoN.setIcon(new ImageIcon(Tablero.class.getResource(Nodo.asignarImagen(2))));
+		Global.maximoN.setIcon(new ImageIcon(Tablero.class.getResource(Nodo.asignarImagen(Global.esfera))));
 		contentPane.add(Global.maximoN);
 		
 		JButton btnCrear = new JButton("A\u00F1adir Esfera");
@@ -236,7 +240,6 @@ public class Tablero extends JFrame implements ActionListener{
 		//Raiz
 		raiz.gbc_graf.gridx=1;
 		nivel0.panel.add(raiz.labelNodo, raiz.gbc_graf);
-		Global.setArbol(superarbolito.getArbol());
 			
 		
 		JButton btnReiniciarPartida = new JButton("Reiniciar Partida");
@@ -284,13 +287,12 @@ public class Tablero extends JFrame implements ActionListener{
     	int cont=1;
 		while (log){
 			if(cont<32){
-	    		Nodo graf = superarbolito.getArbol().Buscar(raiz, cont);
+	    		Nodo graf = Global.arbol.Buscar(raiz, cont);
 	    		if (!graf.isOcupado()){	
 	    			graf.setValor(2);
 		    		Global.Flush();    	
 		    		graf.gbc_graf.gridx=graf.getPosx();
 		    		Pintarcontenedor(graf.getNivel(),graf);
-		    		graf.setOcupado(true);
 	    			log=false;
 	     	 		ArchivoDatos.crearArchivo(Global.usuario);
 	    		}
@@ -306,7 +308,7 @@ public class Tablero extends JFrame implements ActionListener{
 		validate();
 		
     }
-    public void Pintarcontenedor(int nivel,Nodo graf){
+    public static void Pintarcontenedor(int nivel,Nodo graf){
     	switch(nivel){
     	case 1:
     		nivel1.panel.add(graf.labelNodo, graf.gbc_graf);

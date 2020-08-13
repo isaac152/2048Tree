@@ -31,7 +31,6 @@ public class MenuInicial extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField textUser;
 	private JPasswordField passwordField;
-	
 	ArbolUsuario l1 =  new ArbolUsuario();
 	NodoUsuario n1 = null;
 	
@@ -121,8 +120,8 @@ public class MenuInicial extends JDialog {
 						aux = aux.getRight(); 
 					}
 					if (flag){
-						Tablero frame= new Tablero();
 						Global.usuario=aux.getUsername();
+						Tablero frame= new Tablero();
 						frame.setVisible(true);
 						setVisible(false);
 						dispose();

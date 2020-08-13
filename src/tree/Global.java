@@ -1,6 +1,7 @@
 package tree;
 
 import java.awt.Image;
+import java.io.FileNotFoundException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -17,7 +18,9 @@ public class Global {
 	public static int id2=0;
 	public static Arbol arbol;
 	public static JLabel score = new JLabel("0");
-	public static JLabel maximoN = new JLabel("2");
+	public static JLabel highScore = new JLabel("0");
+	public static JLabel maximoN = new JLabel("2");	
+	public static int esfera = 2;
 	public static String usuario;
 	
 	public static void Click (int ID){
@@ -65,7 +68,11 @@ public class Global {
  	 		sumandoScore(n2.getValor());
  	 		esferaMax(n2.getValor());
  	 		ArchivoDatos.crearArchivo(usuario);
-
+ 	 		if(ArchivoDatos.archivoExiste(usuario)){
+ 	 			System.out.println(ArchivoDatos.archivoExiste(usuario));
+ 	 			ArchivoDatos.copiaUltimo(usuario);
+ 	 			
+ 	 		}
  		}
  		Flush();
  	}
@@ -90,6 +97,8 @@ public class Global {
  		int puntuacion= Integer.parseInt(score.getText());
  		puntuacion=puntuacion+valor;
  		score.setText(String.valueOf(puntuacion));
+ 		if (record())
+ 			highScore.setText(String.valueOf(puntuacion));
  	}
  	public static void Reinicio(){
  		score.setText("0");
@@ -104,6 +113,15 @@ public class Global {
 	}
 	public static void setArbol(Arbol arbol) {
 		Global.arbol = arbol;
+	}
+	
+	public static boolean record(){
+		int puntuacion = Integer.valueOf(score.getText());
+		int maximaP = Integer.valueOf(highScore.getText());
+		if(puntuacion>maximaP)
+			return true;
+		else
+			return false;
 	}
 
 	public static void Promocion(Nodo aux)
