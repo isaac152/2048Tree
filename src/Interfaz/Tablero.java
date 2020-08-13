@@ -3,6 +3,7 @@ import tree.ArbolSupremo;
 import tree.Nodo;
 import tree.Global;
 
+import DatosUsuario.Archivos;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -12,11 +13,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.Color;
+import java.awt.Component;
+
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import javax.swing.SpringLayout;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.ImageIcon;
@@ -31,6 +35,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.border.BevelBorder;
 import java.awt.Dimension;
 import javax.swing.border.LineBorder;
+import javax.xml.bind.annotation.XmlElementDecl.GLOBAL;
 
 public class Tablero extends JFrame implements ActionListener{
 
@@ -46,7 +51,6 @@ public class Tablero extends JFrame implements ActionListener{
 	Contenedor varas2=new Contenedor();
 	Contenedor varas3=new Contenedor();
 	Contenedor varas4=new Contenedor();
-
 
 	/**
 	 * Launch the application.
@@ -78,6 +82,16 @@ public class Tablero extends JFrame implements ActionListener{
 	        }
 	    });
 		
+		setExtendedState(Frame.MAXIMIZED_BOTH);
+		addWindowListener(new WindowAdapter() {
+	        public void windowClosing(WindowEvent e) {
+	        	//guardar datos
+	        	setVisible(false);
+	            dispose();
+	            System.out.println(";)");
+	        }
+	    });
+		
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -87,49 +101,30 @@ public class Tablero extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setBounds(getBounds());
 		setContentPane(contentPane);
-		SpringLayout sl_contentPane = new SpringLayout();
-		contentPane.setLayout(sl_contentPane);
-		
-		//superior
-		
-		JLabel lblSumaMaxima = new JLabel("Suma Maxima");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblSumaMaxima, 0, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblSumaMaxima, 10, SpringLayout.WEST, contentPane);
-		lblSumaMaxima.setForeground(new Color(255, 0, 0));
-		lblSumaMaxima.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 15));
-		contentPane.add(lblSumaMaxima);
+		contentPane.setLayout(null);
 		
 		JLabel lblscore = new JLabel("Score");
+		lblscore.setBounds(139, 5, 77, 18);
 		lblscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblscore, 0, SpringLayout.NORTH, lblSumaMaxima);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblscore, 65, SpringLayout.EAST, lblSumaMaxima);
 		contentPane.add(lblscore);
-		
-		
-		sl_contentPane.putConstraint(SpringLayout.NORTH,Global.score, 6, SpringLayout.SOUTH, lblscore);
-		sl_contentPane.putConstraint(SpringLayout.WEST, Global.score, 190, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, Global.score, -10, SpringLayout.EAST, lblscore);
+		Global.score.setBounds(180, 25, 36, 18);
 		contentPane.add(Global.score);
 		
 		JLabel lblHiscore = new JLabel("HIGH score");
+		lblHiscore.setBounds(251, 5, 108, 18);
 		lblHiscore.setFont(new Font("SansSerif", Font.BOLD | Font.ITALIC, 13));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblHiscore, 0, SpringLayout.NORTH, lblSumaMaxima);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblHiscore, 35, SpringLayout.EAST, lblscore);
 		contentPane.add(lblHiscore);
 		
 		JLabel lblHiscoreVar = new JLabel("???");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, lblHiscoreVar, 0, SpringLayout.NORTH, Global.score);
-		sl_contentPane.putConstraint(SpringLayout.WEST, lblHiscoreVar, 306, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, lblHiscoreVar, -10, SpringLayout.EAST, lblHiscore);
+		lblHiscoreVar.setBounds(311, 29, -2, 14);
 		contentPane.add(lblHiscoreVar);
-		
-		sl_contentPane.putConstraint(SpringLayout.NORTH, Global.maximoN, 6, SpringLayout.SOUTH, lblSumaMaxima);
-		sl_contentPane.putConstraint(SpringLayout.WEST, Global.maximoN, 10, SpringLayout.WEST, lblSumaMaxima);
+		Global.maximoN.setBounds(15, 1, 66, 66);
+
+		Global.maximoN.setIcon(new ImageIcon(Tablero.class.getResource(Nodo.asignarImagen(2))));
 		contentPane.add(Global.maximoN);
 		
-		JButton btnCrear = new JButton("Boton");
-		sl_contentPane.putConstraint(SpringLayout.NORTH, btnCrear, 10, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.WEST, btnCrear, 57, SpringLayout.EAST, lblHiscore);
+		JButton btnCrear = new JButton("A\u00F1adir Esfera");
+		btnCrear.setBounds(376, 15, 141, 23);
 		contentPane.add(btnCrear);
 		btnCrear.addActionListener(this);
 
@@ -137,22 +132,16 @@ public class Tablero extends JFrame implements ActionListener{
 		//abajo
 		
 		JPanel panel = new JPanel();
-		panel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		sl_contentPane.putConstraint(SpringLayout.NORTH, panel, 16, SpringLayout.SOUTH, Global.maximoN);
-		sl_contentPane.putConstraint(SpringLayout.WEST, panel, 10, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, panel, -15, SpringLayout.EAST, contentPane);
-		panel.setBounds(15, 63, 1314, 570);
+		panel.setOpaque(false);
+		panel.setBorder(null);
+		panel.setBounds(15, 61, 1335, 559);
 		panel.setBackground(new Color(245, 222, 179));
 		contentPane.add(panel);
 		panel.setLayout(null);
 
 		
 		JPanel MenuInf = new JPanel();
-		sl_contentPane.putConstraint(SpringLayout.WEST, MenuInf, 10, SpringLayout.WEST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.EAST, MenuInf, -15, SpringLayout.EAST, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, panel, -31, SpringLayout.NORTH, MenuInf);
-		sl_contentPane.putConstraint(SpringLayout.NORTH, MenuInf, 646, SpringLayout.NORTH, contentPane);
-		sl_contentPane.putConstraint(SpringLayout.SOUTH, MenuInf, 0, SpringLayout.SOUTH, contentPane);
+		MenuInf.setBounds(15, 651, 1335, 49);
 		MenuInf.setBorder(new BevelBorder(BevelBorder.RAISED, null, null, null, null));
 		MenuInf.setBackground(new Color(135, 206, 235));
 		contentPane.add(MenuInf);
@@ -253,7 +242,8 @@ public class Tablero extends JFrame implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				Global.Reinicio();
 				validate();
-				//guardar partida en txt como partida nueva
+				System.out.println("reset");
+				
 			}
 		});
 		btnReiniciarPartida.setBounds(894, 6, 424, 40);
@@ -268,10 +258,18 @@ public class Tablero extends JFrame implements ActionListener{
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.setBounds(458, 6, 424, 40);
 		MenuInf.add(btnSalir);
+		
+		JLabel label = new JLabel("");
+		ImageIcon icon2 = new ImageIcon(Tablero.class.getResource("/Imagenes/fondo.jpg"));
+        Image img2 = icon2.getImage();
+        Image newImg2 = img2.getScaledInstance(contentPane.getWidth(), contentPane.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon newImc2 = new ImageIcon(newImg2);
+		label.setIcon(newImc2);
+		label.setBounds(0, 0, 1370, 705);
+		contentPane.add(label);
 		btnSalir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				//guardar juego
 				setVisible(false);
 				dispose();
 			}
@@ -286,7 +284,6 @@ public class Tablero extends JFrame implements ActionListener{
 			if(cont<32){
 	    		Nodo graf = superarbolito.getArbol().Buscar(raiz, cont);
 	    		if (!graf.isOcupado()){	
-	    			System.out.println(cont);
 	    			graf.setValor(2);
 		    		Global.Flush();    	
 		    		graf.gbc_graf.gridx=graf.getPosx();

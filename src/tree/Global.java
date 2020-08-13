@@ -1,6 +1,13 @@
 package tree;
 
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Interfaz.Tablero;
+import Interfaz.Victoria;
+import javax.swing.JOptionPane;
 
 public class Global {
 	public static boolean log=true;
@@ -14,11 +21,12 @@ public class Global {
 	public static void Click (int ID){
 		if(log){
 			id=ID;
-			log=false;	
+			log=false;
+			System.out.println("ID1-"+id);
 		}
 		else
 			id2=ID;
-
+		System.out.println("ID2-"+id2);
 	}	
 	public static void Flush(){
 		id=0;
@@ -52,20 +60,31 @@ public class Global {
  			n2.cambiar(n2.getValor()*2);
  			n1.Vaciado();
  			Promocion(n1);
+ 	 		sumandoScore(n2.getValor());
+ 	 		esferaMax(n2.getValor());
  		}
- 		sumandoScore(n2.getValor());
- 		esferaMax(n2.getValor());
  		Flush();
+ 	}
+	private static void Victoria(int valor){
+ 		if (valor>=2048){
+ 			Victoria frame = new Victoria();
+ 			frame.setVisible(true);
+ 		}
+ 	}
+ 	private static void esferaMax(int valor){
+ 		int maxima = Integer.parseInt(maximoN.getText());
+ 		
+ 		if(valor>maxima){
+ 			String direccion= Nodo.asignarImagen(valor);
+ 			maximoN.setIcon(new ImageIcon(Tablero.class.getResource(direccion)));
+        }
+ 		Victoria(valor);
+ 		
  	}
  	private static void sumandoScore(int valor){
  		int puntuacion= Integer.parseInt(score.getText());
  		puntuacion=puntuacion+valor;
  		score.setText(String.valueOf(puntuacion));
- 	}
- 	private static void esferaMax(int valor){
- 		int maxima = Integer.parseInt(maximoN.getText());
- 		if(valor>maxima)
- 			maximoN.setText(String.valueOf(valor));
  	}
  	public static void Reinicio(){
  		score.setText("0");

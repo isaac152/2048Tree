@@ -13,7 +13,7 @@ public class Contenedor {
 		gbl_panel.rowHeights = new int[]{16, 0};
 		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		
+		panel.setOpaque(false);
 	}
 
 }

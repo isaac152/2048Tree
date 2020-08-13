@@ -106,7 +106,7 @@ public class Nodo {
 		this.valor=valor;
 		labelNodo.setIcon(new ImageIcon(Tablero.class.getResource(asignarImagen(valor))));
 	}
-	private String asignarImagen(int valor){
+	public static String asignarImagen(int valor){
 		String aux= String.valueOf(valor);
 		return "/Imagenes/esfera"+aux+".png";
 	}
