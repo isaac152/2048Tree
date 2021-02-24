@@ -12,4 +12,4 @@
   #  9. Record.
   #  10. Salir
   
-# 0/10
+# Status: 10/10
